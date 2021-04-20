@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "slotprocess.h": "c",
+        "is31_usermemmap.h": "c"
+    }
+}
