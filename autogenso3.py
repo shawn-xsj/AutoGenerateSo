@@ -77,6 +77,7 @@ class MyWidgets(QWidget,Ui_GenSo):
         self.ui.choose_button.clicked.connect(self.GetPath)
         self.ui.save_button.clicked.connect(self.SavePath)
         self.ui.generate_button.clicked.connect(self.Generate)
+        self.module_name = ""
       
     def GetPath(self):
         self.directory = QFileDialog.getExistingDirectory(self, "choose file path","./")
@@ -85,6 +86,15 @@ class MyWidgets(QWidget,Ui_GenSo):
         self.save_directory = QFileDialog.getExistingDirectory(self, "choose file path","./")
         self.ui.show_save_path.setText(self.save_directory)
 
+    def GetModuleName(self):
+        if self.ui.ModelName.currentIndex() == 0:          
+            
+            return -1
+        else:
+            module_index = self.ui.ModelName.currentIndex()
+            self.module_name = self.ui.ModelName.itemText(module_index)
+            return 0
+    
     def Generate(self):
         """
         command = "g++ "
@@ -102,16 +112,19 @@ class MyWidgets(QWidget,Ui_GenSo):
         command = "g++ "
         parameter = "-shared -fPIC -o "
         LIB = "/lib"
-        module = "USS"
-        type = ".so"
-        print(self.directory)
-        for file in os.listdir(self.directory):
-            if file != "IS31_UserMemMap.h":
-                command = command + self.directory +"/"+ file +" "
-        command = command +parameter + self.save_directory + LIB+ module + type
-        print(command)
-        os.system(command)
-        self.ui.show_result.setText("finished")
+        NameState = self.GetModuleName()
+        if(NameState == -1):
+            self.ui.show_result.setText("please choose your module name")
+        else:
+            module = self.module_name
+            type = ".so"
+            for file in os.listdir(self.directory):
+                if file != "IS31_UserMemMap.h":                         #生成libUSS.so时需要做的处理，生成其他的.so 是否需要同样的处理TBD;
+                    command = command + self.directory +"/"+ file +" "
+            command = command +parameter + self.save_directory + LIB+ module + type
+            print(command)
+            os.system(command)
+            self.ui.show_result.setText("finished")
 
 
 if __name__ == "__main__":
