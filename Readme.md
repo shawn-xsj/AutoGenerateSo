@@ -16,4 +16,6 @@
 5. 当前生成的可执行文件只能在ubuntu16.04下运行，在其他平台下运行会出错，需要验证是否可以采用在其他平台下生成so文件？
 
 
+![alt 图例]("https://github.com/shawn-xsj/AutoGenerateSo/tree/main/img/result.png")
+<!-- ![avatar]("/home/saic/xsj/AutoSo/AutoSo2/AutoGenerateSo/img/result.png") -->
 
