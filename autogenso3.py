@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QTextEdit
 from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout
 from PyQt5.QtWidgets import QLineEdit
 from GenSoUi import Ui_GenSo
+import shutil
 
 
 
@@ -76,7 +77,8 @@ class MyWidgets(QWidget,Ui_GenSo):
         self.ui.setupUi(self)
         self.ui.choose_button.clicked.connect(self.GetPath)
         self.ui.save_button.clicked.connect(self.SavePath)
-        self.ui.generate_button.clicked.connect(self.Generate)
+        # self.ui.generate_button.clicked.connect(self.Generate)
+        self.ui.generate_button.clicked.connect(self.Generate_new)
         self.module_name = ""
       
     def GetPath(self):
@@ -125,6 +127,40 @@ class MyWidgets(QWidget,Ui_GenSo):
             print(command)
             os.system(command)
             self.ui.show_result.setText("finished")
+
+    # 尝试解决源文件分别在src 和inc文件夹中的问题
+    def Generate_new(self):
+        dirs = "./temp_src/"
+        if not os.path.exists(dirs):
+            os.mkdir(dirs)
+        else:
+            # os.remove(dirs)
+            shutil.rmtree(dirs)
+            os.mkdir(dirs)
+        pre_command =   "cp -rf "+self.directory +"/src"+"/* " +" ./temp_src/ "+ \
+                        "&& cp -rf " +self.directory +"/inc" +"/*" +" ./temp_src/ "
+        os.system(pre_command)
+        command = "g++ "
+        parameter = "-shared -fPIC -o "
+        LIB = "/lib"
+        NameState = self.GetModuleName()
+        operate_dir = "./temp_src/"
+        if(NameState == -1):
+            self.ui.show_result.setText("please choose your module name")
+        else:
+            module = self.module_name
+            type = ".so"
+            for file in os.listdir(operate_dir):
+                if file != "IS31_UserMemMap.h":                         #生成libUSS.so时需要做的处理，生成其他的.so 是否需要同样的处理TBD;
+                    command = command + operate_dir +"/"+ file +" "
+            command = command +parameter + self.save_directory + LIB+ module + type
+            print(command)
+            os.system(command)
+            self.ui.show_result.setText("finished")
+        if os.path.exists(dirs):
+            print("test")
+            shutil.rmtree(dirs)
+
 
 
 if __name__ == "__main__":

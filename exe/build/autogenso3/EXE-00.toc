@@ -39,7 +39,7 @@
  [],
  False,
  False,
- 1619490358,
+ 1619592442,
  [('run',
    '/home/saic/.local/lib/python3.5/site-packages/PyInstaller/bootloader/Linux-64bit/run',
    'EXECUTABLE')])

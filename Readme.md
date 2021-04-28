@@ -10,12 +10,13 @@
 
 ### 待优化  
 1. 界面美化度待优化;  
-2. 当前源文件需要都放在同一个文件夹中，需要调整为放到src和inc中;  
+2. 当前源文件需要都放在同一个文件夹中，需要调整为放到src和inc中;  (已解决，20210428,原文件能分开放到src和inc中)
 3. 多次操作的考虑：改动代码后，如果点击继续生成，会生成新的么; (已解决，20210427, 能生成新的so文件)
 4. 能够输入模块名称，实现不同的模块生成不同的libso;(已解决，20210427)
 5. 当前生成的可执行文件只能在ubuntu16.04下运行，在其他平台下运行会出错，需要验证是否可以采用在其他平台下生成so文件？
 
 
-![alt 图例]("https://github.com/shawn-xsj/AutoGenerateSo/tree/main/img/result.png")
-<!-- ![avatar]("/home/saic/xsj/AutoSo/AutoSo2/AutoGenerateSo/img/result.png") -->
+<!-- ![alt 图例]("https://github.com/shawn-xsj/AutoGenerateSo/tree/main/img/result.png") -->
+<!-- ![插入本地图片]("/home/saic/xsj/AutoSo/AutoSo2/AutoGenerateSo/img/result.png") -->
+![插入图片测试]("http://pic.downcc.com/upload/2015-9/2015923174024.png")
 
