@@ -140,7 +140,7 @@ class MyWidgets(QWidget,Ui_GenSo):
         pre_command =   "cp -rf "+self.directory +"/src"+"/* " +" ./temp_src/ "+ \
                         "&& cp -rf " +self.directory +"/inc" +"/*" +" ./temp_src/ "
         os.system(pre_command)
-        command = "g++ "
+        command = "g++ -std=c++98 "
         parameter = "-shared -fPIC -o "
         LIB = "/lib"
         NameState = self.GetModuleName()
